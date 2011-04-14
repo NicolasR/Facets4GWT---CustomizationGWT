@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+<web-app>
+  <servlet>
+    <servlet-name>uriServlet</servlet-name>
+    <servlet-class>org.eclipse.emf.server.ecore.resource.URIServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>UICustomParserService</servlet-name>
+    <servlet-class>fr.upmc.ta.facets4gwt.customisation.module.gwt.server.UICustomParserServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>uriServlet</servlet-name>
+    <url-pattern>/org.eclipse.example.library.LibraryEditor/uriService</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>UICustomParserService</servlet-name>
+    <url-pattern>/org.eclipse.example.library.LibraryEditor/UICustomParserService</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>LibraryEditor.html</welcome-file>
+  </welcome-file-list>
+</web-app>

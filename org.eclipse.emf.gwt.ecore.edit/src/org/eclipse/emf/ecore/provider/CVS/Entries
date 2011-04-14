@@ -1,0 +1,26 @@
+/EAnnotationItemProvider.java/1.2/Wed Apr 28 20:37:15 2010//
+/EAttributeItemProvider.java/1.2/Wed Apr 28 20:37:14 2010//
+/EClassItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EClassifierItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EDataTypeItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EEnumItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EEnumLiteralItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EFactoryItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EGenericTypeItemProvider.java/1.3/Mon May 17 13:17:50 2010//
+/EModelElementItemProvider.java/1.3/Mon May 17 13:17:50 2010//
+/ENamedElementItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EObjectItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EOperationItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EPackageItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EParameterItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EReferenceItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EStringToStringMapEntryItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/EStructuralFeatureItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/ETypeParameterItemProvider.java/1.2/Wed Apr 28 20:37:16 2010//
+/ETypedElementItemProvider.java/1.2/Wed Apr 28 20:37:17 2010//
+/EcoreEditPlugin.java/1.4/Thu Jan 20 01:10:19 2011//
+/EcoreEditPluginImages.java/1.1/Mon May 17 13:17:50 2010//
+/EcoreEditPluginProperties.java/1.1/Mon May 17 13:17:50 2010//
+/EcoreItemProviderAdapterFactory.java/1.3/Mon May 17 13:17:50 2010//
+D/icons////
+/package.html/1.2/Wed Apr 28 20:37:17 2010//

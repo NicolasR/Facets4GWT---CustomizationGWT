@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uicustom:MetamodelView xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:query="http://www.eclipse.org/MoDisco/infra/query/0.8.incubation" xmlns:uicustom="http://www.eclipse.org/MoDisco/infra/browser/custom/0.8" metamodelURI="http://www.eclipse.org/emf/2002/Ecore">
+  <types metaclassName="ecore.EPackage">
+    <customizedFeatures customizedFeature="backgroundColor">
+      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(128,255,0)"/>
+    </customizedFeatures>
+    <attributes attributeName="name">
+      <customizedFeatures customizedFeature="label">
+        <defaultValue xsi:type="uicustom:DerivedFeatureValue">
+          <valueCalculator xsi:type="query:JavaModelQuery" href="modisco:/query/My#T"/>
+        </defaultValue>
+      </customizedFeatures>
+    </attributes>
+    <attributes attributeName="nsPrefix">
+      <customizedFeatures customizedFeature="label">
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="nom statique"/>
+      </customizedFeatures>
+      <customizedFeatures customizedFeature="color">
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(255,0,0)"/>
+      </customizedFeatures>
+    </attributes>
+  </types>
+</uicustom:MetamodelView>

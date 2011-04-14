@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>greetServlet</servlet-name>
+    <servlet-class>fr.upmc.ta.facets4gwt.customisation.module.gwt.server.GreetingServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>greetServlet</servlet-name>
+    <url-pattern>/fr_upmc_ta_facets4gwt_customisation_module_gwt/greet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Fr_upmc_ta_facets4gwt_customisation_module_gwt.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>UICustomParserService</servlet-name>
+  	<servlet-class>fr.upmc.ta.facets4gwt.customisation.module.gwt.server.UICustomParserServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UICustomParserService</servlet-name>
+  	<url-pattern>/facets4gwt_module/UICustomParserService</url-pattern>
+  </servlet-mapping>
+
+</web-app>
