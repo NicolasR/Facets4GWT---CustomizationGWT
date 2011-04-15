@@ -4,6 +4,7 @@ import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.Widget;
 
 public class CustomisableElementWrapperFactory
 {
@@ -22,9 +23,19 @@ public class CustomisableElementWrapperFactory
 		return elementWrapper;
 	}
 	
-	public ACustomisableElementWrapper createWrapper( Object element, Grid properties, IItemPropertyDescriptor propertyDescriptor, int index )
+	public ACustomisableElementWrapper createWrapper( Object element, Grid properties, 
+			IItemPropertyDescriptor propertyDescriptor, int index,
+			AdapterFactoryItemDelegator itemDelegator,
+			Widget widget )
 	{
-		return null;
+		PropertyWrapper propertyWrapper = new PropertyWrapper();
+		propertyWrapper.setElement(element);
+		propertyWrapper.setProperties(properties);
+		propertyWrapper.setPropertyDescriptor(propertyDescriptor);
+		propertyWrapper.setIndex(index);
+		propertyWrapper.setItemDelegator(itemDelegator);
+		propertyWrapper.setWidget(widget);
+		return propertyWrapper;
 	}
 	
 	public static CustomisableElementWrapperFactory getInstance( )

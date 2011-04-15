@@ -1,22 +1,9 @@
 package fr.upmc.ta.facets4gwt.customisation.module.gwt.client;
 
-import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 
 public class ElementWrapper extends ACustomisableElementWrapper
 {
 	private StringBuilder stringBuilder;
-	
-	private AdapterFactoryItemDelegator itemDelegator;
-	
-	public void setItemDelegator( AdapterFactoryItemDelegator itemDelegator )
-	{
-		this.itemDelegator=itemDelegator;
-	}
-	
-	public AdapterFactoryItemDelegator getItemDelegator( )
-	{
-		return itemDelegator;
-	}
 	
 	public void setStringBuilder( StringBuilder stringBuilder )
 	{
@@ -32,27 +19,58 @@ public class ElementWrapper extends ACustomisableElementWrapper
 	public void customise(ACustomisation customisation) {
 		ElementCustomisation elementCustomisation = (ElementCustomisation)customisation;
 		
-		switch (elementCustomisation.getType())
+		StringBuilder text = new StringBuilder();
+		StringBuilder color = new StringBuilder();
+		StringBuilder end = new StringBuilder();
+		
+		String[] splittedText = this.itemDelegator.getText(this.getElement()).split(" ");
+		
+		text.append(splittedText[0]);
+		for (int i = 1; i < splittedText.length; i++) {
+			end.append(" " + splittedText[i]);
+		}
+		
+		for(Object cf : elementCustomisation.getCustomisationFeatures())
 		{
-		case LABEL:
-			this.customiseElementLabel(elementCustomisation);
-			break;
-		case COLOR:
-			this.customiseElementColor(elementCustomisation);
-			break;
-		default:
-			break;
+			switch (((CustomisationFeature)cf).getType())
+			{
+			case LABEL:
+				this.customiseElementLabel((CustomisationFeature)cf, text);
+				break;
+			case COLOR:
+				this.customiseElementColor((CustomisationFeature)cf, color);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		if(color.length() == 0)
+		{
+			this.stringBuilder.append(text.toString());
+			this.stringBuilder.append(end.toString());
+		}
+		else
+		{
+			this.stringBuilder.append(color.toString());
+			this.stringBuilder.append(text.toString());
+			this.stringBuilder.append(end.toString());
+			this.stringBuilder.append("</div>");
 		}
 	}
-
-	private void customiseElementColor(ElementCustomisation elementCustomisation) {
-		this.stringBuilder.append("<div style='color:rgb" + elementCustomisation.getValue() + ";>");
+	
+	@Override
+	public void normalize() {
 		this.stringBuilder.append(this.itemDelegator.getText(this.getElement()));
-		this.stringBuilder.append("</div>");
 	}
 
-	private void customiseElementLabel(ElementCustomisation elementCustomisation) {
-		this.stringBuilder.append(elementCustomisation.getValue());
+	private void customiseElementColor(CustomisationFeature cf, StringBuilder color) {
+		color.append("<div style='color:rgb" + cf.getValue() + ";'>");
+	}
+
+	private void customiseElementLabel(CustomisationFeature cf, StringBuilder text) {
+		text.delete(0, text.length());
+		text.append(cf.getValue());
 	}
 	
 }

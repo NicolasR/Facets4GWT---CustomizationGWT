@@ -135,8 +135,11 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.gwt.view.client.TreeViewModel;
 
+import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.CustomisationFeature;
 import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.CustomisationPool;
+import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.Customiser;
 import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.ElementCustomisation;
+import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.PropertyCustomisation;
 import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.UICustomParserService;
 import fr.upmc.ta.facets4gwt.customisation.module.gwt.client.UICustomParserServiceAsync;
 
@@ -182,9 +185,18 @@ public abstract class EditorEntryPoint implements EntryPoint
 	@Override
 	public void onSuccess(CustomisationPool result) {
 		customisationPool = result;
+		CustomisationPool.getInstance().setCustomisations(result.getCustomisations());
 		for(Object e : result.getCustomisations())
 		{
-			System.out.println(((ElementCustomisation)e).getMetaclass());
+			System.out.println("Metaclass name : " + ((ElementCustomisation)e).getMetaclass());
+			for (Object p : ((ElementCustomisation)e).getProperties())
+			{
+				System.out.println("Property name : " + ((PropertyCustomisation)p).getName());
+				for (Object c : ((PropertyCustomisation)p).getCustomisationFeatures())
+				{
+					System.out.println(((CustomisationFeature)c).getValue());
+				}
+			}
 		}
 		createUI();
 	}
@@ -617,10 +629,10 @@ public abstract class EditorEntryPoint implements EntryPoint
 	          Cell<Object> cell =
 	            new AbstractCell<Object>()
 	            {
-	        	  //TODO Customisation
 	              @Override
 	              public void render(Context context, Object value, SafeHtmlBuilder safeHtmlBuilder)
 	              {
+	            	  Customiser customiser = new Customiser();
 	                StringBuilder sb = new StringBuilder();
 	                Object image = itemDelegator.getImage(value);
 	                if (image instanceof ImageResource)
@@ -634,7 +646,11 @@ public abstract class EditorEntryPoint implements EntryPoint
 	                  sb.append("background:url('").append(imageResource.getURL()).append("') ");
 	                  sb.append("no-repeat scroll center center transparent;");
 	                  sb.append("\"></div>");
-	                  sb.append(itemDelegator.getText(value));
+	                  //sb.append(itemDelegator.getText(value));
+	                  customiser.render(customiser.getCustomisableElementWrapperFactory().createWrapper( 
+	                		  value, 
+	                		  sb, 
+	                		  itemDelegator));
 	                  sb.append("</div>");
 	                }
 	                else if (image instanceof ComposedImage)
@@ -667,12 +683,20 @@ public abstract class EditorEntryPoint implements EntryPoint
 	                    sb.append("no-repeat scroll center center transparent;");
 	                    sb.append("\"></div>");
 	                  }
-	                  sb.append(itemDelegator.getText(value));
+	                  //sb.append(itemDelegator.getText(value));
+	                  customiser.render(customiser.getCustomisableElementWrapperFactory().createWrapper( 
+	                		  value, 
+	                		  sb, 
+	                		  itemDelegator));
 	                  sb.append("</div>");
 	                }
 	                else
 	                {
-	                  sb.append(itemDelegator.getText(value));
+	                  //sb.append(itemDelegator.getText(value));
+	                	customiser.render(customiser.getCustomisableElementWrapperFactory().createWrapper( 
+		                		  value, 
+		                		  sb, 
+		                		  itemDelegator));
 	                }
 	                safeHtmlBuilder.appendHtmlConstant(sb.toString());
 	              }
@@ -808,6 +832,8 @@ public abstract class EditorEntryPoint implements EntryPoint
 	             List<IItemPropertyDescriptor> propertyDescriptors = itemDelegator.getPropertyDescriptors(object);
 	             if (propertyDescriptors != null)
 	             {
+	            	 Customiser customiser = new Customiser();
+	            	 
 	               properties.clear();
 	               propertyUpdater.clear();
 	               int size = propertyDescriptors.size();
@@ -818,7 +844,10 @@ public abstract class EditorEntryPoint implements EntryPoint
 	               for (int i = 0; i < size; ++i)
 	               {
 	                 final IItemPropertyDescriptor propertyDescriptor = propertyDescriptors.get(i);
-	                 properties.setText(i, 0, propertyDescriptor.getDisplayName(object));
+	                 //properties.setText(i, 0, propertyDescriptor.getDisplayName(object));
+	                 customiser.render(
+	                		 customiser.getCustomisableElementWrapperFactory().createWrapper(object, properties, propertyDescriptor, i, itemDelegator, null)
+	                		 );
 	                 Widget widget = null;
 	                 final IItemLabelProvider itemLabelProvider = propertyDescriptor.getLabelProvider(object);
 	                 final Object feature = propertyDescriptor.getFeature(object);
@@ -1094,8 +1123,12 @@ public abstract class EditorEntryPoint implements EntryPoint
 	                 }
 	                 if (widget != null)
 	                 {
+	                	 //TODO ICI
 	                   widget.setWidth("95%");
-	                   properties.setWidget(i, 1, widget);
+//	                   properties.setWidget(i, 1, widget);
+	                   customiser.render(
+	                		   customiser.getCustomisableElementWrapperFactory().createWrapper(object, properties, propertyDescriptor, i, itemDelegator, widget)
+		                		 );
 	                   if (!propertyDescriptor.canSetProperty(object) && widget instanceof FocusWidget)
 	                   {
 	                     ((FocusWidget)widget).setEnabled(false);

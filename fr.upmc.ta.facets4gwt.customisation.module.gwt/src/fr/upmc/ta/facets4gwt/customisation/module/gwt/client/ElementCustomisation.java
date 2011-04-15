@@ -11,8 +11,6 @@ public class ElementCustomisation extends ACustomisation implements IsSerializab
 	 */
 	private java.util.Set properties;
 	
-	private String metamodel;
-	
 	public ElementCustomisation()
 	{
 	}
@@ -44,16 +42,4 @@ public class ElementCustomisation extends ACustomisation implements IsSerializab
 	{
 		return properties;
 	}
-	
-	public void setMetamodel( String metamodel )
-	{
-		this.metamodel=metamodel;
-	}
-	
-	public String getMetamodel( )
-	{
-		return metamodel;
-	}
-	
-	
 }

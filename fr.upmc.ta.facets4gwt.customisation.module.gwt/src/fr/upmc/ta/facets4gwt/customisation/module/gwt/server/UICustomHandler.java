@@ -20,6 +20,9 @@ public class UICustomHandler extends DefaultHandler {
 	private Set elementCustomisationSet;
 	private Set propertyCustomisationSet;
 	
+	private Set ecfs;
+	private Set pcfs;
+	
 	private boolean inTypes, inAttributes;
 	private String metamodel;
 	private String metaclass;
@@ -49,11 +52,13 @@ public class UICustomHandler extends DefaultHandler {
 		else if (qName.equals("types"))
 		{
 			this.propertyCustomisationSet = new HashSet();
+			this.ecfs = new HashSet();
 			this.metaclass = attributes.getValue("metaclassName");
 			this.inTypes = true;
 		}
 		else if (qName.equals("attributes"))
 		{
+			this.pcfs = new HashSet();
 			this.attributeName = attributes.getValue("attributeName");
 			this.inAttributes = true;
 			this.inTypes = false;
@@ -85,11 +90,13 @@ public class UICustomHandler extends DefaultHandler {
 		}
 		else if (qName.equals("types"))
 		{
+			this.ec = CustomisationFactory.createElementCustomisation(metamodel, metaclass, this.ecfs, propertyCustomisationSet);
 			this.elementCustomisationSet.add(ec);
 			this.inTypes = false;
 		}
 		else if (qName.equals("attributes"))
 		{
+			this.pc = CustomisationFactory.createPropertyCustomisation(this.metamodel, attributeName, this.pcfs);
 			this.propertyCustomisationSet.add(pc);
 			this.inAttributes = false;
 			this.inTypes = true;
@@ -98,11 +105,11 @@ public class UICustomHandler extends DefaultHandler {
 		{
 			if (this.inTypes)
 			{
-				this.ec = CustomisationFactory.createElementCustomisation(metamodel, metaclass, type, value, valueType, propertyCustomisationSet);
+				this.ecfs.add(CustomisationFactory.createCustomisationFeature(type, value, valueType));
 			}
 			else if (this.inAttributes)
 			{
-				this.pc = CustomisationFactory.createPropertyCustomisation(attributeName, type, value, valueType);
+				this.pcfs.add(CustomisationFactory.createCustomisationFeature(type, value, valueType));
 			}
 		}
 		else if (qName.equals("defaultValue"))

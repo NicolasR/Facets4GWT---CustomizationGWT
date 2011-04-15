@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="ASCII"?>
-<uicustom:MetamodelView xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:query="http://www.eclipse.org/MoDisco/infra/query/0.8.incubation" xmlns:uicustom="http://www.eclipse.org/MoDisco/infra/browser/custom/0.8" metamodelURI="http://www.eclipse.org/emf/2002/Ecore">
-  <types metaclassName="ecore.EPackage">
-    <customizedFeatures customizedFeature="backgroundColor">
-      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(128,255,0)"/>
+<uicustom:MetamodelView xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uicustom="http://www.eclipse.org/MoDisco/infra/browser/custom/0.8" metamodelURI="http://www.example.eclipse.org/Library">
+  <types metaclassName="library.Book">
+    <customizedFeatures customizedFeature="label">
+      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="Livre"/>
+    </customizedFeatures>
+    <attributes attributeName="title">
+      <customizedFeatures customizedFeature="label">
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="titre"/>
+      </customizedFeatures>
+      <customizedFeatures customizedFeature="color">
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(0,0,255)"/>
+      </customizedFeatures>
+    </attributes>
+    <attributes attributeName="category">
+      <customizedFeatures customizedFeature="label">
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="Categorie"/>
+      </customizedFeatures>
+    </attributes>
+  </types>
+  <types metaclassName="library.Library">
+    <customizedFeatures customizedFeature="label">
+      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="Bibliotheque"/>
+    </customizedFeatures>
+    <customizedFeatures customizedFeature="color">
+      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(255,128,0)"/>
     </customizedFeatures>
     <attributes attributeName="name">
       <customizedFeatures customizedFeature="label">
-        <defaultValue xsi:type="uicustom:DerivedFeatureValue">
-          <valueCalculator xsi:type="query:JavaModelQuery" href="modisco:/query/My#T"/>
-        </defaultValue>
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="nom"/>
       </customizedFeatures>
     </attributes>
-    <attributes attributeName="nsPrefix">
+  </types>
+  <types metaclassName="library.Writer">
+    <customizedFeatures customizedFeature="label">
+      <defaultValue xsi:type="uicustom:StaticFeatureValue" value="Ecrivain"/>
+    </customizedFeatures>
+    <attributes attributeName="name">
       <customizedFeatures customizedFeature="label">
-        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="nom statique"/>
-      </customizedFeatures>
-      <customizedFeatures customizedFeature="color">
-        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="(255,0,0)"/>
+        <defaultValue xsi:type="uicustom:StaticFeatureValue" value="nom"/>
       </customizedFeatures>
     </attributes>
   </types>
